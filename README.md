@@ -53,13 +53,13 @@ To visualize single CpG:
 
 
 
-![CpGPlot](Plots/Plot1.png)
+![CpGPlot](https://github.com/ClinicalEpigeneticsLaboratory/EpiGenToolKit/blob/main/Plots/Plot1.png?raw=true)
 
 
 To visualize specific genomic region:
         vis.plot_Range(chr=17, start=5999, end=6770) # All arguments describing plot details such as height or width (described above) are also available in this method.
 
-![CpGPlot](Plots/Plot2.png)
+![CpGPlot](https://github.com/ClinicalEpigeneticsLaboratory/EpiGenToolKit/blob/main/Plots/Plot2.png?raw=true)
 
 
 To visualize specific CpGs in genomic order, instead of whole region pass collection of CpGs:
@@ -67,7 +67,7 @@ To visualize specific CpGs in genomic order, instead of whole region pass collec
         viz.plot_Range(cpgs=["cg04594855", "cg09002677"]) 
 
 
-![CpGPlot](Plots/Plot3.png)
+![CpGPlot](https://github.com/ClinicalEpigeneticsLaboratory/EpiGenToolKit/blob/main/Plots/Plot3.png?raw=true)
 
 
 To save plots use *export* argument for instance:
@@ -92,4 +92,4 @@ To start analysis:
             ea.enrichemntAnalysis(categories_to_analyse=["UCSC_RefGene_Group", "Relation_to_UCSC_CpG_Island"],  # list of categories to analyse
                               cpgs=cpgs) # list of cpgs to analyse against backgorund
 
-![examplePlot](Plots/Plot4.png)
+![examplePlot](https://github.com/ClinicalEpigeneticsLaboratory/EpiGenToolKit/blob/main/Plots/Plot4.png?raw=true)
