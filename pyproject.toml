@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "epitoolkit"
+version = "0.1.0"
+description = "EpiToolkit is a set of tools useful in the analysis of data from EPIC / 450K microarrays."
+authors = ["Jan Bińkowski <jan.binkowski@pum.edu.pl>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = ">=3.8,<3.10"
+pandas = "^1.3.4"
+numpy = "^1.21.3"
+seaborn = "^0.11.2"
+matplotlib = "^3.4.3"
+plotly = "^5.3.1"
+scipy = "^1.7.1"
+tqdm = "^4.62.3"
+pathlib = "^1.0.1"
+autopep8 = "^1.5.7"
+Sphinx = "^4.2.0"
+
+[tool.poetry.dev-dependencies]
+black = "^21.9b0"
+flake8 = "^4.0.1"
+pylint = "^2.11.1"
+pre-commit = "^2.15.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
