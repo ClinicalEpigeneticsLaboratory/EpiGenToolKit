@@ -57,6 +57,7 @@ To visualize single CpG:
 
 
 To visualize specific genomic region:
+
         vis.plot_Range(chr=17, start=5999, end=6770) # All arguments describing plot details such as height or width (described above) are also available in this method.
 
 ![CpGPlot](https://github.com/ClinicalEpigeneticsLaboratory/EpiGenToolKit/blob/main/Plots/Plot2.png?raw=true)
