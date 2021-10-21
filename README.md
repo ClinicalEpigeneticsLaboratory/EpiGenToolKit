@@ -1,9 +1,9 @@
 # EpiGenToolKit
 Is a small library created to deal with data from EPIC / 450K microarrays. The tool allows to:
 
-    a) Simply visualize methylation levels of specific CpG or genomic region. 
+a) Simply visualize methylation levels of specific CpG or genomic region. 
 
-    b) Perform enrichment analysis of a selected subset of CpG against the whole array. In this type of analysis expected frequency [%] (based on mynorm) of genomic regions is compared to observed (based on provided cpgs set), results are comapred using chi-square test.
+b) Perform enrichment analysis of a selected subset of CpG against the whole array. In this type of analysis expected frequency [%] (based on mynorm) of genomic regions is compared to observed (based on provided cpgs set), results are comapred using chi-square test.
 
 ## How to start?
 
@@ -41,15 +41,15 @@ all files must have *.csv extension, mynorm must contain samples [**columns**] a
 To visualize single CpG:
 
     viz.plot_CpG("cg07881041", # cpg ID 
-             static=False, # plot type static / interactive
-             height=400, # plot size
-             width=700, # plot size
-             title="", # plot title
-             legend_title="", # legend title
-             font_size=22, # font size
-             show_legend=True, # False to hide legedn
-             x_axis_label="CpG", # x axsis label
-             y_axis_label="beta-values") # y axis label
+        static=False, # plot type static / interactive
+        height=400, # plot size
+        width=700, # plot size
+        title="", # plot title
+        legend_title="", # legend title
+        font_size=22, # font size
+        show_legend=True, # False to hide legedn
+        x_axis_label="CpG", # x axsis label
+        y_axis_label="beta-values") # y axis label
 
 
 
@@ -80,18 +80,18 @@ To save plots use *export* argument for instance:
 
 To perform enrichment analysis against any type of genomic region specified in the manifest file, the user needs to initialize **EnrichemntAnalysis** object.
 
-            from src.epitoolkit.tools import EnrichemntAnalysis
-            ea = EnrichemntAnalysis(manifest=<path_to_array_manifest>,
-                        mynorm=<path_to_mynorm_file>)
+        from src.epitoolkit.tools import EnrichemntAnalysis
+        ea = EnrichemntAnalysis(manifest=<path_to_array_manifest>,
+                mynorm=<path_to_mynorm_file>)
 
 or if Analysis object already exists:
 
-            ea = EnrichemntAnalysis(manifest=viz.manifest,
-                        mynorm=viz.mynorm)
+        ea = EnrichemntAnalysis(manifest=viz.manifest,
+                mynorm=viz.mynorm)
 
 To start analysis:
 
-            ea.enrichemntAnalysis(categories_to_analyse=["UCSC_RefGene_Group", "Relation_to_UCSC_CpG_Island"],  # list of categories to analyse
-                              cpgs=cpgs) # list of cpgs to analyse against backgorund
+        ea.enrichemntAnalysis(categories_to_analyse=["UCSC_RefGene_Group", "Relation_to_UCSC_CpG_Island"],  # list of categories to analyse
+                        cpgs=cpgs) # list of cpgs to analyse against backgorund
 
 ![examplePlot](https://github.com/ClinicalEpigeneticsLaboratory/EpiGenToolKit/blob/main/Plots/Plot4.png?raw=true)
