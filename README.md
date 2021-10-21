@@ -5,7 +5,7 @@ Is a small library created to deal with data from EPIC / 450K microarrays. The t
 
     b) Perform enrichment analysis of a selected subset of CpG against the whole array. In this type of analysis expected frequency [%] (based on mynorm) of genomic regions is compared to observed (based on provided cpgs set), results are comapred using chi-square test.
 
-### How to start?
+## How to start?
 
 a) using env
 
@@ -23,10 +23,10 @@ c) or just clone the repository:
         git clone https://github.com/ClinicalEpigeneticsLaboratory/EpiGenToolKit.git
         cd EpiGenToolKit && poetry install
 
-### How to use?
+## How to use?
 
 
-#### Visualization
+### Visualization
 
 To visualize single CpG site or specific genomic region initialize **Visualise** object:
     
@@ -72,10 +72,11 @@ To visualize specific CpGs in genomic order, instead of whole region pass collec
 
 
 To save plots use *export* argument for instance:
+
         viz.plot_Range(chr=17, start=5999, end=6770, export="plot.html") # if static = False only html format is supported if static = True, use png extension.
 
 
-#### Enrichemnt analysis
+### Enrichment analysis
 
 To perform enrichment analysis against any type of genomic region specified in the manifest file, the user needs to initialize **EnrichemntAnalysis** object.
 
