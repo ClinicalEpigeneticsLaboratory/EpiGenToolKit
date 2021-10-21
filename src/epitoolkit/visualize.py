@@ -184,7 +184,7 @@ class Visualize:
         fig.update_yaxes(range=y_range)
 
         if static:
-            fig.show(renderer="browser")
+            fig.show(renderer="png")
         else:
             fig.show()
 
