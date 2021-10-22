@@ -188,6 +188,7 @@ class Visualize:
         start: t.Union[int, None] = None,
         end: t.Union[int, None] = None,
         cpgs: t.Collection = [],
+        category_order: t.Union[t.List[str], None] = None,
         show_all_points: str = "outliers",
         title: str = "",
         show_legend: bool = False,
@@ -215,6 +216,7 @@ class Visualize:
                 "User must provide chr AND start and END arguments or collection of cpgs to visualize."
             )
 
+	available_probes = self.manifest[available_probes, "MAPINFO"].sort_values(ascending=True).index
         data = self.mynorm.loc[available_probes, :].T
         data = pd.concat((data, self.poi["POI"]), axis=1)
         data = pd.melt(data, "POI")
@@ -240,6 +242,7 @@ class Visualize:
             width=width,
             height=height,
             y_range=y_range,
+            category_order=category_order
         )
 
         self.__print(fig, static)
