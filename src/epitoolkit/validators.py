@@ -43,6 +43,7 @@ def overlap_samples_between_poi_and_mynorm(
             )
             poi = poi.loc[intersection, :]
             mynorm = mynorm[intersection]
+            return poi, mynorm
 
         else:
             raise InternalException(
