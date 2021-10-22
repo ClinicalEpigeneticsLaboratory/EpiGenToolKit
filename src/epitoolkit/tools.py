@@ -216,7 +216,7 @@ class Visualize:
                 "User must provide chr AND start and END arguments or collection of cpgs to visualize."
             )
 
-	available_probes = self.manifest[available_probes, "MAPINFO"].sort_values(ascending=True).index
+        available_probes = self.manifest[available_probes, "MAPINFO"].sort_values(ascending=True).index
         data = self.mynorm.loc[available_probes, :].T
         data = pd.concat((data, self.poi["POI"]), axis=1)
         data = pd.melt(data, "POI")
