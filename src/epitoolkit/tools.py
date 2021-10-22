@@ -132,6 +132,7 @@ class Visualize:
         self,
         cpg: str,
         title: str = "",
+        category_order: t.Union[t.List[str], None] = None,
         static: bool = False,
         show_legend: bool = False,
         x_axis_label: str = "POI",
@@ -173,6 +174,7 @@ class Visualize:
             width=width,
             height=height,
             y_range=y_range,
+            category_order=category_order
         )
 
         self.__print(fig, static)
