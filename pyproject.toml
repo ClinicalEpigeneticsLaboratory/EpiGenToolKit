@@ -1,10 +1,11 @@
 [tool.poetry]
 name = "epitoolkit"
-version = "0.2.1"
+version = "0.2.2"
 description = "EpiToolkit is a set of tools useful in the analysis of data from EPIC / 450K microarrays."
 authors = ["Jan Bińkowski <jan.binkowski@pum.edu.pl>"]
 readme = "README.md"
 license = "MIT"
+repository = "https://github.com/ClinicalEpigeneticsLaboratory/EpiGenToolKit"
 
 [tool.poetry.dependencies]
 python = ">=3.8,<3.10"

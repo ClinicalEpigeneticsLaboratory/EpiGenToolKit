@@ -3,6 +3,13 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Notebooks cache
+*.ipynb
+
+# Save cache
+.pre-commit-config.yaml.save
+nano.save
+
 # Data
 *.csv
 *.html
@@ -108,6 +115,7 @@ celerybeat.pid
 # Environments
 .env
 .venv
+.idea/
 env/
 venv/
 ENV/
