@@ -50,14 +50,14 @@ class Visualize:
                 manifest, low_memory=False, index_col=0, skiprows=skiprows, **kwargs
             )
             self.mynorm = pd.read_csv(mynorm, index_col=0, **kwargs)
-            self.poi = pd.read_csv(poi, index_col=0, **
-                                   kwargs)[poi_col].to_frame()
-            self.poi.columns = ["POI"]
-
+            self.poi = pd.read_csv(poi, index_col=0, **kwargs)
         else:
             raise InternalException(
                 "Both mynorm and manifest must be not empty and must be the same type: str or DataFrame."
             )
+
+        self.poi = self.poi[poi_col].to_frame()
+        self.poi.columns = ["POI"]
 
         self.poi = corect_col_names(self.poi)
         self.probes = find_overlap(self.mynorm.index, self.manifest.index)
