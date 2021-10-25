@@ -273,7 +273,7 @@ class EnrichmentAnalysis:
         self,
         manifest: t.Union[str, DataFrame],
         mynorm: t.Union[str, DataFrame],
-        skiprows: int = 7,
+        skiprows: int = 0,
         **kwargs,
     ):
 
@@ -286,6 +286,10 @@ class EnrichmentAnalysis:
                 manifest, low_memory=False, index_col=0, skiprows=skiprows, **kwargs
             )
             self.mynorm = pd.read_csv(mynorm, index_col=0, **kwargs)
+
+    @classmethod
+    def load(cls, viz_object: Visualize):
+        return cls(viz_object.manifest, viz_object.mynorm)
 
     def enrichmentAnalysis(
         self, categories_to_analyse: t.Collection, cpgs: t.Collection
