@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "epitoolkit"
-version = "0.2.3"
+version = "0.2.4"
 description = "EpiToolkit is a set of tools useful in the analysis of data from EPIC / 450K microarrays."
 authors = ["Jan Bińkowski <jan.binkowski@pum.edu.pl>"]
 readme = "README.md"
