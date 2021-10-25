@@ -3,6 +3,7 @@ from pathlib import Path
 
 import pandas as pd
 import scipy.stats as sts
+import plotly.express as px
 import plotly.graph_objects as go
 from pandas.core.frame import DataFrame
 
@@ -189,6 +190,7 @@ class Visualize:
         start: t.Union[int, None] = None,
         end: t.Union[int, None] = None,
         cpgs: t.Collection = [],
+        mode: str = "box",
         category_order: t.Union[t.List[str], None] = None,
         show_all_points: str = "outliers",
         title: str = "",
@@ -233,21 +235,40 @@ class Visualize:
 
         fig = go.Figure()
 
-        for cpg in available_probes:
+        if mode == "box":
+
+            for cpg in available_probes:
+                for group in order:
+                    values = data[data["POI"] == group][cpg]
+                    x_loc = [cpg] * len(values)
+                    fig.add_trace(
+                        go.Box(
+                            y=values,
+                            x=x_loc,
+                            boxpoints=show_all_points,
+                            boxmean=True,
+                            name=group,
+                        )
+                    )
+
+            fig.update_layout(boxmode="group")
+
+        else:
             for group in order:
-                values = data[data["POI"] == group][cpg]
-                x_loc = [cpg] * len(values)
+                df = data[data["POI"] == group]
+                df = df.drop("POI", axis=1)
+                df = df.mean()
+
+                x_loc = self.manifest.loc[df.index, "MAPINFO"]
+
                 fig.add_trace(
-                    go.Box(
-                        y=values,
+                    go.Scatter(
+                        y=df.values,
                         x=x_loc,
-                        boxpoints=show_all_points,
-                        boxmean=True,
                         name=group,
+                        mode="lines+markers"
                     )
                 )
-
-        fig.update_layout(boxmode="group")
 
         fig = self.__upgrade_figure(
             fig,
