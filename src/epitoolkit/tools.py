@@ -3,7 +3,6 @@ from pathlib import Path
 
 import pandas as pd
 import scipy.stats as sts
-import plotly.express as px
 import plotly.graph_objects as go
 from pandas.core.frame import DataFrame
 
@@ -28,7 +27,8 @@ class Visualize:
         manifest: t.Union[str, Path, DataFrame],
         mynorm: t.Union[str, Path, DataFrame],
         poi: t.Union[str, Path, DataFrame],
-        skiprows: int = 7,
+        poi_col: str = "POI",
+        skiprows: int = 0,
         **kwargs,
     ) -> None:
 
@@ -50,12 +50,13 @@ class Visualize:
                 manifest, low_memory=False, index_col=0, skiprows=skiprows, **kwargs
             )
             self.mynorm = pd.read_csv(mynorm, index_col=0, **kwargs)
-            self.poi = pd.read_csv(poi, index_col=0, **kwargs)
+            self.poi = pd.read_csv(poi, index_col=0, **
+                                   kwargs)[poi_col].to_frame()
+            self.poi.columns = ["POI"]
 
         else:
             raise InternalException(
-                "Both mynorm and manifest must be not empty and must be the same\
-                                     type: str or DataFrame."
+                "Both mynorm and manifest must be not empty and must be the same type: str or DataFrame."
             )
 
         self.poi = corect_col_names(self.poi)
@@ -174,7 +175,7 @@ class Visualize:
             width=width,
             height=height,
             y_range=y_range,
-            category_order=category_order
+            category_order=category_order,
         )
 
         self.__print(fig, static)
@@ -213,26 +214,43 @@ class Visualize:
 
         else:
             raise InternalException(
-                "User must provide chr AND start and END arguments or collection of cpgs to visualize."
+                "User must provide chr AND start and END arguments or any type of collection of cpgs to visualize."
             )
 
-        available_probes = self.manifest[available_probes, "MAPINFO"].sort_values(ascending=True).index
+        available_probes = (
+            self.manifest.loc[available_probes, "MAPINFO"]
+            .sort_values(ascending=True)
+            .index
+        )
         data = self.mynorm.loc[available_probes, :].T
         data = pd.concat((data, self.poi["POI"]), axis=1)
-        data = pd.melt(data, "POI")
 
-        fig = px.box(
-            data,
-            x="variable",
-            y="value",
-            color="POI",
-            width=width,
-            height=height,
-            points=show_all_points,
-        )
+        if category_order:
+            order = category_order
+
+        else:
+            order = self.poi["POI"].unique()
+
+        fig = go.Figure()
+
+        for cpg in available_probes:
+            for group in order:
+                values = data[data["POI"] == group][cpg]
+                x_loc = [cpg] * len(values)
+                fig.add_trace(
+                    go.Box(
+                        y=values,
+                        x=x_loc,
+                        boxpoints=show_all_points,
+                        boxmean=True,
+                        name=group,
+                    )
+                )
+
+        fig.update_layout(boxmode="group")
+
         fig = self.__upgrade_figure(
             fig,
-            category_order=None,
             title=title,
             show_legend=show_legend,
             x_axis_label=x_axis_label,
@@ -242,7 +260,6 @@ class Visualize:
             width=width,
             height=height,
             y_range=y_range,
-            category_order=category_order
         )
 
         self.__print(fig, static)
@@ -251,7 +268,7 @@ class Visualize:
             self.__export_figure(fig, static=static, export=export)
 
 
-class EnrichemntAnalysis:
+class EnrichmentAnalysis:
     def __init__(
         self,
         manifest: t.Union[str, DataFrame],
@@ -270,7 +287,7 @@ class EnrichemntAnalysis:
             )
             self.mynorm = pd.read_csv(mynorm, index_col=0, **kwargs)
 
-    def enrichemntAnalysis(
+    def enrichmentAnalysis(
         self, categories_to_analyse: t.Collection, cpgs: t.Collection
     ) -> None:
         check_categories(self.manifest, categories_to_analyse)

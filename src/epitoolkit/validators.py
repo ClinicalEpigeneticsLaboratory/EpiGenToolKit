@@ -38,8 +38,7 @@ def overlap_samples_between_poi_and_mynorm(
 
         if len(intersection) > 0:
             print(
-                f"Not all samples in POI overlap with samples in myNorm. Future steps will use \
-                    {len(intersection)} samples."
+                f"Not all samples in POI overlap with samples in myNorm. Future steps will use {len(intersection)} samples."
             )
             poi = poi.loc[intersection, :]
             mynorm = mynorm[intersection]
